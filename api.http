@@ -1,0 +1,28 @@
+POST http://localhost:5000/events
+Content-Type: application/json
+ 
+{
+    "title": "Novo evento",
+    "details": null,
+    "maximoAttendes": 1
+}
+
+###
+
+POST http://localhost:5000/events/debc8489-f1d0-4fa4-a715-cd0ef1b4f58b/attendes
+Content-Type: application/json
+
+{
+    "name": "Lourenço Cardoso",
+    "email": "lourencocardoso007@gmail.com"
+}
+
+
+###
+
+GET http://localhost:5000/events/4f5e6452-1957-4b90-9d68-7301bd8cf86d
+
+
+###
+
+GET http://localhost:5000/attendees/2/badge
