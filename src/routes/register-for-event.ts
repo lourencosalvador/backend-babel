@@ -7,6 +7,8 @@ import { prisma } from "../lib/prisma";
 export async function regiserForEvent(app: FastifyInstance){
     app.withTypeProvider<ZodTypeProvider>().post('/events/:eventId/attendes', {
       schema: {
+        summary: "Registrar o usuario ao eventos",
+        tags: ['attendees'],
         body: z.object({
             name: z.string().min(4),
             email: z.string().email(),

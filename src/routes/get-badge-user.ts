@@ -8,10 +8,20 @@ export async function getBadgeUser(app: FastifyInstance){
     .withTypeProvider<ZodTypeProvider>()
     .get('/attendees/:attendeeId/badge', {
         schema: {
+            summary: "Pega os dados do passe que pertence ao o usuarios do evento",
+            tags: ['attendees'],
             params: z.object({
                 attendeeId: z.coerce.number().int(),
             }),
-            response: {}
+            response: {
+                200: z.object({
+                    badge: z.object({
+                        name: z.string(),
+                        email: z.string(),
+                        eventTitle: z.string()
+                    })
+                })
+            }
         }
     }, async (request, reply) => {
          
@@ -37,6 +47,13 @@ export async function getBadgeUser(app: FastifyInstance){
             throw new Error("Credenciais do usuario não econtrado")
         }
 
-        return reply.send({attende})
+
+        return reply.send({
+            badge: {
+                name: attende.name,
+                email: attende.email,
+                eventTitle: attende.event.title
+            }
+        })
     })
 }
